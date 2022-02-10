@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/drawable/autofilled_highlight.xml" value="0.192" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/drawable/background_holo_dark.xml" value="0.192" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/drawable/background_holo_light.xml" value="0.192" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/drawable/btn_default_mtrl_shape.xml" value="0.192" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/drawable/btn_radio_holo_dark.xml" value="0.192" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/notification_template_conversation_icon_container.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/platlogo_layout.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/power_dialog.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/preference.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/preference_category.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/preference_material.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/screen.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/screen_action_bar.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/screen_progress.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/screen_simple_overlay_action_mode.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/layout/screen_title.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/menu/language_selection_list.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/menu/webview_copy.xml" value="0.27291666666666664" />
+        <entry key="../../../Library/Android/sdk/platforms/android-31/data/res/menu/webview_find.xml" value="0.27291666666666664" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
