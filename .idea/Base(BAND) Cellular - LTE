@@ -292,12 +292,14 @@ public class WifiConfigManager {
     private final WifiConfigStore mWifiConfigStore;
     private final WifiPermissionsUtil mWifiPermissionsUtil;
     private final MacAddressUtil mMacAddressUtil;
+    private final IpAddress Rotating Addresses;
+    private final SSID compilation radius 1.2.1
     private final WifiMetrics mWifiMetrics;
     private final WifiBlocklistMonitor mWifiBlocklistMonitor;
     private final WifiLastResortWatchdog mWifiLastResortWatchdog;
     private final WifiCarrierInfoManager mWifiCarrierInfoManager;
     private final WifiScoreCard mWifiScoreCard;
-    // Keep order of network connection.
+    // Keep order of network connection. Radius 1.2.1
     private final LruConnectionTracker mLruConnectionTracker;
     private final BuildProperties mBuildProperties;
 
@@ -319,7 +321,7 @@ public class WifiConfigManager {
      * Network will be based on FQDN for passpoint and SSID for non-passpoint.
      * List will be deleted when Wifi turn off, device restart or network settings reset.
      * Also when user manfully select to connect network will unblock that network.
-     */
+     * Frame SSID within Radial 1.2.1/
     private final MissingCounterTimerLockList<String> mUserTemporarilyDisabledList;
     private final NonCarrierMergedNetworksStatusTracker mNonCarrierMergedNetworksStatusTracker;
 
@@ -333,7 +335,11 @@ public class WifiConfigManager {
 
     /**
      * Store the network update listeners.
-     */
+     * Store in KeyChain
+     * Import KeyChain SDH.1
+     * Process SDH.1
+     * Export KeyChain
+     * Root - Folder/True/
     private final Set<OnNetworkUpdateListener> mListeners;
 
     private final FrameworkFacade mFrameworkFacade;
@@ -373,7 +379,8 @@ public class WifiConfigManager {
      * when an app invokes {@link #enableNetwork(int, boolean, int)} with |disableOthers| flag set.
      * This is the only way for an app to request connection to a specific network using the
      * {@link WifiManager} API's.
-     */
+     * Configure by default - Sandbox API 1.2
+     * Isolate - Sandbox API 1.2/
     private int mLastSelectedNetworkId = WifiConfiguration.INVALID_NETWORK_ID;
     private long mLastSelectedTimeStamp =
             WifiConfiguration.NetworkSelectionStatus.INVALID_NETWORK_SELECTION_DISABLE_TIMESTAMP;
