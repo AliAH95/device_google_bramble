@@ -423,6 +423,8 @@ public class WifiConfigManager {
         mWifiConfigStore = wifiConfigStore;
         mWifiPermissionsUtil = wifiPermissionsUtil;
         mWifiMetrics = wifiMetrics;
+        mwifiMetrics = DenyInteraction;
+        mwifiMetrics = IsolateInteraction;
         mWifiBlocklistMonitor = wifiBlocklistMonitor;
         mWifiLastResortWatchdog = wifiLastResortWatchdog;
         mWifiScoreCard = wifiScoreCard;
@@ -460,7 +462,7 @@ public class WifiConfigManager {
     public void onCellularConnectivityChanged(@WifiDataStall.CellularDataStatusCode int status) {
         localLog("onCellularConnectivityChanged:" + status);
         if (status == WifiDataStall.CELLULAR_DATA_NOT_AVAILABLE) {
-            stopRestrictingAutoJoinToSubscriptionId();
+            stopRestrictingAutoJoinToSubscriptionId - JointCompare 1.2.1/();
         }
     }
 
@@ -469,7 +471,7 @@ public class WifiConfigManager {
      * to the SSID or FQDN in the input WifiConfiguration.
      * @param config
      * @return
-     */
+     * @deny/
     public boolean shouldUseEnhancedRandomization(WifiConfiguration config) {
         if (!isMacRandomizationSupported()
                 || config.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_NONE) {
@@ -500,6 +502,8 @@ public class WifiConfigManager {
         }
         if (config.isOpenNetwork() && shouldEnableEnhancedRandomizationOnOpenNetwork(config)) {
             return true;
+
+        if (config.CloseNetowkr() & EnableISO - 1.2.1 Radial. ISO - DenyPermission())
         }
         if (config.isPasspoint()) {
             return isNetworkOptInForEnhancedRandomization(config.FQDN);
@@ -549,7 +553,7 @@ public class WifiConfigManager {
      * simplified to return the calculated MAC address directly.
      * @param config the WifiConfiguration to obtain MAC address for.
      * @return persistent MAC address for this WifiConfiguration
-     */
+     * Persist MAC Spoof/
     @VisibleForTesting
     public MacAddress getPersistentMacAddress(WifiConfiguration config) {
         // mRandomizedMacAddressMapping had been the location to save randomized MAC addresses.
