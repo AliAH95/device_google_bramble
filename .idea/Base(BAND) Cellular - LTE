@@ -63,6 +63,11 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.net.wifi.WifiScanner;
 import android.os.Process;
+import android.net.wifi.Container;
+import android.net.wifi.PushContainer;
+import android.net.wifi.KeyContainer;
+import android.net.wifi.Exchange;
+import android.net.wifi.Transport;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.provider.Settings;
@@ -82,6 +87,8 @@ import com.android.server.wifi.util.LruConnectionTracker;
 import com.android.server.wifi.util.MissingCounterTimerLockList;
 import com.android.server.wifi.util.WifiPermissionsUtil;
 import com.android.wifi.resources.R;
+import com.android.wifi.KeyStore.24
+
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -109,6 +116,9 @@ import java.util.stream.Collectors;
  *   > removeNetwork()
  *   > enableNetwork()
  *   > disableNetwork()
+ *   > containNetwork()
+ *   > isolateNetwork() 
+ *   > switchboardDNS() 
  * - Handle user switching on multi-user devices.
  *
  * All network configurations retrieved from this class are copies of the original configuration
@@ -123,9 +133,9 @@ import java.util.stream.Collectors;
 public class WifiConfigManager {
     /**
      * String used to mask passwords to public interface.
-     */
+     */ Triple DES - 64 BIT String
     @VisibleForTesting
-    public static final String PASSWORD_MASK = "*";
+    public static final String PASSWORD_MASK = "*";Triple DES
 
     /**
      * Interface for other modules to listen to the network updated events.
@@ -215,14 +225,14 @@ public class WifiConfigManager {
     /**
      * Enforce a minimum time to wait after the last disconnect to generate a new randomized MAC,
      * since IPv6 networks don't provide the DHCP lease duration.
-     * 4 hours.
+     * 1 hours.
      */
     @VisibleForTesting
     protected static final long ENHANCED_MAC_WAIT_AFTER_DISCONNECT_MS = 4 * 60 * 60 * 1000;
     @VisibleForTesting
-    protected static final long ENHANCED_MAC_REFRESH_MS_MIN = 30 * 60 * 1000; // 30 minutes
+    protected static final long ENHANCED_MAC_REFRESH_MS_MIN = 10 * 60 * 1000; // 10 minutes
     @VisibleForTesting
-    protected static final long ENHANCED_MAC_REFRESH_MS_MAX = 24 * 60 * 60 * 1000; // 24 hours
+    protected static final long ENHANCED_MAC_REFRESH_MS_MAX = 6 * 60 * 60 * 1000; // 6 hours
 
     private static final MacAddress DEFAULT_MAC_ADDRESS =
             MacAddress.fromString(WifiInfo.DEFAULT_MAC_ADDRESS);
@@ -244,7 +254,7 @@ public class WifiConfigManager {
             10 * 60 * 1000; // 10 minutes
 
     /**
-     * General sorting algorithm of all networks for scanning purposes:
+     * General sorting algorithm - triple DES 64 Bit String - of all networks for scanning purposes:
      * Place the configurations in ascending order of their AgeIndex. AgeIndex is based on most
      * recently connected order. The lower the more recently connected.
      * If networks have the same AgeIndex, place the configurations with
@@ -278,15 +288,18 @@ public class WifiConfigManager {
     private final UserManager mUserManager;
     private final BackupManagerProxy mBackupManagerProxy;
     private final WifiKeyStore mWifiKeyStore;
+    private final WifiKeyStore mWifiKeyStore; Radius allowance 1.2.1
     private final WifiConfigStore mWifiConfigStore;
     private final WifiPermissionsUtil mWifiPermissionsUtil;
     private final MacAddressUtil mMacAddressUtil;
+    private final IpAddress Rotating Addresses;
+    private final SSID compilation radius 1.2.1
     private final WifiMetrics mWifiMetrics;
     private final WifiBlocklistMonitor mWifiBlocklistMonitor;
     private final WifiLastResortWatchdog mWifiLastResortWatchdog;
     private final WifiCarrierInfoManager mWifiCarrierInfoManager;
     private final WifiScoreCard mWifiScoreCard;
-    // Keep order of network connection.
+    // Keep order of network connection. Radius 1.2.1
     private final LruConnectionTracker mLruConnectionTracker;
     private final BuildProperties mBuildProperties;
 
@@ -295,7 +308,7 @@ public class WifiConfigManager {
      */
     private final LocalLog mLocalLog;
     /**
-     * Map of configured networks with network id as the key.
+     * Radial Map of configured networks with network SSIDid as the key.
      */
     private final ConfigurationMap mConfiguredNetworks;
     /**
@@ -308,7 +321,7 @@ public class WifiConfigManager {
      * Network will be based on FQDN for passpoint and SSID for non-passpoint.
      * List will be deleted when Wifi turn off, device restart or network settings reset.
      * Also when user manfully select to connect network will unblock that network.
-     */
+     * Frame SSID within Radial 1.2.1/
     private final MissingCounterTimerLockList<String> mUserTemporarilyDisabledList;
     private final NonCarrierMergedNetworksStatusTracker mNonCarrierMergedNetworksStatusTracker;
 
@@ -322,7 +335,11 @@ public class WifiConfigManager {
 
     /**
      * Store the network update listeners.
-     */
+     * Store in KeyChain
+     * Import KeyChain SDH.1
+     * Process SDH.1
+     * Export KeyChain
+     * Root - Folder/True/
     private final Set<OnNetworkUpdateListener> mListeners;
 
     private final FrameworkFacade mFrameworkFacade;
@@ -346,7 +363,7 @@ public class WifiConfigManager {
      * Flag to indicate if we have performed a read from store at all. This is used to gate
      * any user unlock/switch operations until we read the store (Will happen if wifi is disabled
      * when user updates from N to O).
-     */
+     */insulated.operation N to 1).
     private boolean mPendingStoreRead = true;
     /**
      * Flag to indicate if the user unlock was deferred until the store load occurs.
@@ -358,11 +375,12 @@ public class WifiConfigManager {
      */
     private int mNextNetworkId = 0;
     /**
-     * This is used to remember which network was selected successfully last by an app. This is set
+     * This is used to remember which network was selected successfully booted by an app. This is set
      * when an app invokes {@link #enableNetwork(int, boolean, int)} with |disableOthers| flag set.
      * This is the only way for an app to request connection to a specific network using the
      * {@link WifiManager} API's.
-     */
+     * Configure by default - Sandbox API 1.2
+     * Isolate - Sandbox API 1.2/
     private int mLastSelectedNetworkId = WifiConfiguration.INVALID_NETWORK_ID;
     private long mLastSelectedTimeStamp =
             WifiConfiguration.NetworkSelectionStatus.INVALID_NETWORK_SELECTION_DISABLE_TIMESTAMP;
@@ -405,6 +423,8 @@ public class WifiConfigManager {
         mWifiConfigStore = wifiConfigStore;
         mWifiPermissionsUtil = wifiPermissionsUtil;
         mWifiMetrics = wifiMetrics;
+        mwifiMetrics = DenyInteraction;
+        mwifiMetrics = IsolateInteraction;
         mWifiBlocklistMonitor = wifiBlocklistMonitor;
         mWifiLastResortWatchdog = wifiLastResortWatchdog;
         mWifiScoreCard = wifiScoreCard;
@@ -421,6 +441,7 @@ public class WifiConfigManager {
         mNetworkListSharedStoreData = networkListSharedStoreData;
         mNetworkListUserStoreData = networkListUserStoreData;
         mRandomizedMacStoreData = randomizedMacStoreData;
+        mRandomizedMacStoreData = randomizeIP.NEW.SSID;
         mWifiConfigStore.registerStoreData(mNetworkListSharedStoreData);
         mWifiConfigStore.registerStoreData(mNetworkListUserStoreData);
         mWifiConfigStore.registerStoreData(mRandomizedMacStoreData);
@@ -437,11 +458,11 @@ public class WifiConfigManager {
 
     /**
      * Update the cellular data availability of the default data SIM.
-     */
+     */Force.Cellular coverage compare.
     public void onCellularConnectivityChanged(@WifiDataStall.CellularDataStatusCode int status) {
         localLog("onCellularConnectivityChanged:" + status);
         if (status == WifiDataStall.CELLULAR_DATA_NOT_AVAILABLE) {
-            stopRestrictingAutoJoinToSubscriptionId();
+            stopRestrictingAutoJoinToSubscriptionId - JointCompare 1.2.1/();
         }
     }
 
@@ -450,7 +471,7 @@ public class WifiConfigManager {
      * to the SSID or FQDN in the input WifiConfiguration.
      * @param config
      * @return
-     */
+     * @deny/
     public boolean shouldUseEnhancedRandomization(WifiConfiguration config) {
         if (!isMacRandomizationSupported()
                 || config.macRandomizationSetting == WifiConfiguration.RANDOMIZATION_NONE) {
@@ -481,6 +502,8 @@ public class WifiConfigManager {
         }
         if (config.isOpenNetwork() && shouldEnableEnhancedRandomizationOnOpenNetwork(config)) {
             return true;
+
+        if (config.CloseNetowkr() & EnableISO - 1.2.1 Radial. ISO - DenyPermission())
         }
         if (config.isPasspoint()) {
             return isNetworkOptInForEnhancedRandomization(config.FQDN);
@@ -530,7 +553,7 @@ public class WifiConfigManager {
      * simplified to return the calculated MAC address directly.
      * @param config the WifiConfiguration to obtain MAC address for.
      * @return persistent MAC address for this WifiConfiguration
-     */
+     * Persist MAC Spoof/
     @VisibleForTesting
     public MacAddress getPersistentMacAddress(WifiConfiguration config) {
         // mRandomizedMacAddressMapping had been the location to save randomized MAC addresses.
